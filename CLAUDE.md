@@ -99,7 +99,7 @@
 - `dist/robots.txt`, `dist/sitemap.xml`: 검색엔진용입니다. 예전 시안과 `05-screening.html`은 검색에서 제외했습니다. 새 페이지를 만들면 sitemap에 추가합니다.
 - `index.html` head에 공유 미리보기 태그(og/twitter)와 회사 정보(JSON-LD)가 있습니다. 연락처나 채널이 바뀌면 같이 고칩니다.
 - 구글 서치 콘솔: 2026-11-13 `https://jowoo-production.com/`(URL 접두어) 등록, HTML 태그로 소유권 확인, sitemap.xml 제출 완료. `google-site-verification` meta 태그는 지우지 않습니다.
-- 네이버 서치어드바이저: 자동 조작이 막힌 사이트라 사용자가 직접 진행합니다. 인증 코드(`naver-site-verification`)는 `index.html`·`05-screening.html` head에 meta 태그로 넣습니다.
+- 네이버 서치어드바이저: 자동 조작이 막힌 사이트라 사용자가 직접 진행합니다. 인증 코드(`naver-site-verification`)는 2026-11-13 `index.html`·`05-screening.html` head에 넣었습니다. 지우지 않습니다.
 
 ## 수정 확인
 
