@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /01-cinematic.html
+Disallow: /02-minimal.html
+Disallow: /03-bold.html
+Disallow: /04-hybrid.html
+Disallow: /05-screening.html
+Disallow: /design-studies.html
+
+Sitemap: https://jowoo-production.com/sitemap.xml
