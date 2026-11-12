@@ -49,7 +49,7 @@
 
   function syncSound() {
     get('toggle-sound').disabled = !film().video;
-    get('toggle-sound').innerHTML = film().video ? `SOUND<br>${soundOn ? 'ON' : 'OFF'}` : 'NO<br>AUDIO';
+    get('toggle-sound').innerHTML = film().video ? `SOUND<br> ${soundOn ? 'ON' : 'OFF'}` : 'NO<br> AUDIO';
     get('toggle-sound').setAttribute('aria-label', film().video ? (soundOn ? '소리 끄기' : '소리 켜기') : '이 작업물에는 음성이 없습니다');
     video.muted = !soundOn;
   }

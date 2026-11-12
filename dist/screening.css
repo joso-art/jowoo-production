@@ -193,3 +193,89 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
 }
 @media(max-width:360px){.room-header{padding-left:13px;padding-right:13px}.room-nav button{font-size:16px}.viewer{grid-template-columns:minmax(0,1fr) 68px}}
 @media(max-width:700px){.player-dock{grid-template-rows:38px 55px}#seek{margin:0}.room-channel-list{grid-template-columns:1fr;padding:0 24px 30px;gap:24px}.room-channel h3{font-size:20px}.room-channel-links{gap:22px}.room-channel-links a{font-size:11px;min-height:44px}}
+/* ===== 2026-11-13 레이아웃 정리: 공통 3단 그리드와 글자 크기 통일 ===== */
+:root{--pad:32px;--side:220px;--col-gap:28px;--label:10px}
+.room-header,.viewer,.player-dock,.room-footer{padding-left:var(--pad);padding-right:var(--pad);column-gap:var(--col-gap)}
+.room-header{grid-template-columns:var(--side) minmax(0,1fr) var(--side);align-items:center}
+.room-brand{gap:16px;align-items:center}
+.room-brand small{font-size:10px;line-height:1.55;letter-spacing:1.4px}
+.room-nav{justify-self:center;gap:48px}
+.room-nav button{padding:8px 0;line-height:1.3}
+.room-nav button>span{font-size:12px;margin-top:6px;letter-spacing:0}
+.room-clock>span{font-size:var(--label);letter-spacing:1.4px;margin-bottom:8px}
+.room-clock time{font-size:18px;letter-spacing:1px}
+/* 가운데 영상 영역: 좌우 칸 폭을 같게 맞춰 영상과 메뉴가 화면 중앙에 오도록 */
+.viewer{grid-template-columns:var(--side) minmax(0,1fr) var(--side)}
+.stage-view{align-items:flex-start}
+.project-meta{padding:0;gap:22px}
+.meta-label,.film-sidebar-label{font:var(--label)/1.4 'Courier New',monospace;letter-spacing:1.4px;color:var(--room-muted);margin:0 0 10px;text-transform:uppercase}
+.meta-project h1{font-size:20px;line-height:1.45;margin:0 0 8px}
+.meta-kind{font-size:11px;letter-spacing:1.2px;color:var(--room-lime)}
+.film-list{gap:6px}
+.film-list-item{align-items:center;padding:12px 12px 12px 10px;min-height:60px}
+.film-list-index{font-size:11px;line-height:1}
+.film-list-copy{gap:4px}
+.film-list-copy strong{font-size:13px;line-height:1.4}
+.film-list-copy small{font-size:11px;line-height:1.4;letter-spacing:.6px}
+.film-list-arrow{font-size:14px;line-height:1;text-align:right}
+.project-count{gap:8px}
+.project-count small{font-size:var(--label);letter-spacing:1px}
+.meta-note{font-size:11px;letter-spacing:1.2px}
+.meta-note small{font-size:13px;line-height:1.75;margin-top:10px}
+/* 오른쪽 칸: 오른쪽 끝선에 맞춰 정렬 (시계, ALL PROJECTS와 같은 선) */
+.aspect-tools{justify-content:flex-start;align-items:flex-end;padding:0;gap:12px}
+.aspect-tools>*{width:96px;text-align:center}
+.aspect-tools .meta-label{margin:0;font-size:var(--label);color:var(--room-muted)}
+.aspect-button{width:96px;min-height:100px}
+.aspect-help{margin:0;font-size:var(--label);letter-spacing:1.2px}
+.sound-button{width:96px;margin-top:4px;padding-top:14px;font-size:11px;letter-spacing:1.2px}
+/* 아래 재생줄: 위와 같은 3단 칸에 맞춤 */
+.player-dock{grid-template-columns:var(--side) minmax(0,1fr) var(--side);gap:0 var(--col-gap)}
+.transport{justify-self:start;gap:6px}
+.seek-labels{font-size:var(--label);letter-spacing:1.2px;margin-bottom:6px;align-items:baseline}
+.seek-labels output{font-size:11px;letter-spacing:1px}
+.all-work-button{min-width:0;width:100%;padding:12px 16px;gap:14px;font-size:13px;letter-spacing:.6px}
+.all-work-button small{font-size:11px;letter-spacing:0}
+/* 맨 아래 줄 */
+.room-footer{display:grid;grid-template-columns:var(--side) minmax(0,1fr) var(--side);font-size:9px;letter-spacing:1.2px}
+.room-footer>span:last-child{justify-self:end}
+.room-footer .footer-note{justify-self:center;font-size:11px;color:var(--room-muted)}
+@media(max-width:1200px){:root{--pad:24px;--side:200px;--col-gap:22px}.room-nav{gap:36px}}
+@media(max-width:1000px){:root{--side:180px;--col-gap:18px}.room-nav{gap:28px}.room-nav button{font-size:18px}.aspect-tools>*,.aspect-button,.sound-button{width:84px}.room-footer>span:first-child{display:block;visibility:hidden}}
+@media(max-width:900px){.room-header{grid-template-columns:1fr auto}.room-nav{justify-self:stretch}}
+/* 모바일: 영상을 가로 가득 쓰고, 형식·소리는 영상 아래 한 줄로 */
+@media(max-width:700px){
+  :root{--pad:18px;--col-gap:12px;--label:9px}
+  .screening-room{height:auto;min-height:100dvh;grid-template-rows:auto auto auto auto}
+  .room-header{padding-top:16px;padding-bottom:14px;row-gap:14px}
+  .room-nav{gap:0}
+  .room-nav button{font-size:17px}
+  .room-nav button>span{font-size:11px;margin-top:4px}
+  .viewer{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;row-gap:12px}
+  .project-meta{grid-row:1;padding:0}
+  .project-meta .meta-project h1{font-size:16px}
+  .meta-project .meta-kind{font-size:9px}
+  .project-count>span{font-size:16px}
+  .stage-view{grid-row:2;grid-column:1;width:100%;aspect-ratio:var(--media-aspect,1.3333);height:auto}
+  .aspect-tools{grid-row:3;grid-column:1;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding:2px 0 4px}
+  .aspect-tools>*{width:auto}
+  .aspect-tools .meta-label{font-size:var(--label)}
+  .aspect-button{flex-direction:row;width:auto;min-height:34px;padding:0 12px;gap:8px;font-size:12px}
+  .aspect-button .ratio-original{width:18px;height:14px}
+  .aspect-button small{margin:0}
+  .aspect-help{display:none}
+  .sound-button{width:auto;min-height:34px;margin:0 0 0 auto;padding:0 14px;border:1px solid var(--room-lime);border-radius:2px}
+  .sound-button br{display:none}
+  .player-dock{grid-template-columns:auto minmax(0,1fr);gap:6px 12px;padding-top:16px;padding-bottom:10px}
+  .all-work-button{justify-self:end;width:auto}
+  .room-footer{grid-template-columns:minmax(0,1fr) auto;padding-top:10px;padding-bottom:14px;font-size:8px}
+  .room-footer>span:first-child{display:none}
+  .room-footer .footer-note{justify-self:start;font-size:10px}
+}
+.room-brand,.room-brand strong,.room-brand small{white-space:nowrap}
+.room-footer>span:first-child{white-space:nowrap;letter-spacing:.8px}
+@media(max-width:700px){
+  .project-meta .meta-label{font-size:var(--label);letter-spacing:1.2px;margin:0}
+  .room-header{row-gap:18px}
+  .viewer{padding-top:4px}
+}
