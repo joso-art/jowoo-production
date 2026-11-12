@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090b09">
+  <meta name="description" content="조우 프로덕션 포트폴리오. 두 사람이 함께 만드는 AI 영상, 숏폼·릴스, 광고와 영화 작업을 만나보세요.">
+  <title>조우 프로덕션 | 포트폴리오</title>
+  <link rel="canonical" href="https://jowoo-production.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="조우 프로덕션 | 포트폴리오">
+  <meta property="og:description" content="두 사람의 시선으로 만드는 새로운 장면. AI 영상, 숏폼·릴스, 광고와 영화.">
+  <meta property="og:url" content="https://jowoo-production.com/">
+  <meta property="og:image" content="https://jowoo-production.com/assets/posters/video-04-official.jpg">
+  <meta property="og:image:alt" content="조우 프로덕션 몽권랜드의 놀이공원 장면">
+  <meta name="twitter:card" content="summary_large_image">  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="screening.css?v=15">
+  <script src="portfolio.js" defer></script>
+  <script src="screening-data.js?v=14" defer></script>
+  <script src="screening.js?v=13" defer></script>
+</head>
+<body data-style="screening" data-portfolio>
+
+  <div class="screening-room">
+    <header class="room-header">
+      <a class="room-brand" href="index.html" aria-label="조우 프로덕션 포트폴리오 홈"><strong>조우<span class="brand-hanja" lang="zh-Hant">遭遇</span></strong><small>PRODUCTION<br>FILM &amp; VISUALS.</small></a>
+      <nav class="room-nav" aria-label="메인 메뉴"><button id="open-index">PROJECTS <span>목록</span></button><button id="open-team">ABOUT <span>조우</span></button><button data-contact>LET'S TALK <span>문의 ↗</span></button></nav>
+      <div class="room-clock"><span>LOCAL TIME / KST</span><time id="local-clock">--:--:--</time></div>
+    </header>
+    <main class="viewer" id="viewer" data-ratio="original" data-media="video" aria-labelledby="current-title">
+      <aside class="project-meta">
+        <div class="meta-project"><span class="meta-label">NOW SHOWING</span><h1 id="current-title">어린이날</h1><span id="project-kind" class="meta-kind">OFFICIAL</span><span id="project-version" class="meta-version" hidden>후편집본</span></div>
+        <nav class="film-sidebar" aria-label="영상 목록"><span class="film-sidebar-label">영상 목록</span><div class="film-list" data-film-list></div></nav>
+        <button id="open-film-list" class="film-list-toggle" aria-label="영상 목록 열기" aria-haspopup="dialog" aria-controls="film-list-dialog"><span aria-hidden="true">☰</span> 영상 목록</button>
+        <div class="project-count"><span id="project-number">01</span><small>/ <span id="project-total">04</span></small></div>
+        <div class="meta-note"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">PAUSED</span><small id="media-note">어린이날의 추억과 행복한 기억을 느낄 수 있습니다.</small></div>
+      </aside>
+      <div class="stage-view">
+        <div class="screen" id="room-screen" tabindex="0" aria-label="영상 플레이어. 스페이스로 재생·일시정지, 좌우 방향키로 5초 이동">
+          <img class="screen-poster" id="screen-poster" src="assets/posters/video-03-final.jpg" alt="어린이날 — OFFICIAL" width="964" height="720" fetchpriority="high">
+          <video id="screen-video" class="screen-video" muted loop playsinline preload="metadata" hidden></video>
+          <div class="screen-shade" aria-hidden="true"></div>
+          <div class="screen-grain" aria-hidden="true"></div>
+          <span class="screen-mark">JOWOO / PORTFOLIO</span>
+          <span class="screen-sample" id="screen-sample">MOTION STUDY</span>
+          <span class="frame-corner corner-tl" aria-hidden="true"></span><span class="frame-corner corner-tr" aria-hidden="true"></span><span class="frame-corner corner-bl" aria-hidden="true"></span><span class="frame-corner corner-br" aria-hidden="true"></span>
+          <span class="screen-timecode" id="screen-timecode" aria-hidden="true">00:00:00:00</span>
+        </div>
+      </div>
+      <aside class="aspect-tools" aria-label="영상 형식과 소리">
+        <span class="meta-label">FORMAT</span>
+        <div class="aspect-button aspect-readout" aria-label="영상 원본 비율 4대3"><span class="ratio-icon ratio-original" aria-hidden="true"></span><span id="original-frame-label">4:3</span><small>원본</small></div>
+
+        <span class="aspect-help" id="frame-note">ORIGINAL<br>FRAME</span>
+        <button id="toggle-sound" class="sound-button" aria-label="소리 켜기">SOUND<br>OFF</button>
+      </aside>
+    </main>
+    <section class="player-dock" aria-label="재생 컨트롤">
+      <div class="transport">
+        <button id="previous-project" class="transport-button" aria-label="이전 작업물"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14M19 5 8 12l11 7Z"/></svg></button>
+        <button id="back-five" class="transport-button time-jump" aria-label="5초 뒤로 이동">−5<span>s</span></button>
+        <button id="toggle-play" class="transport-button play-button" aria-label="영상 재생"><svg id="play-symbol" viewBox="0 0 24 24" aria-hidden="true"><path class="play-shape" d="M8 5 20 12 8 19Z"/><path class="pause-shape" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+        <button id="forward-five" class="transport-button time-jump" aria-label="5초 앞으로 이동">+5<span>s</span></button>
+        <button id="next-project" class="transport-button" aria-label="다음 작업물"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5v14M5 5l11 7-11 7Z"/></svg></button>
+      </div>
+      <div class="seek-wrap"><div class="seek-labels"><output id="elapsed-time">00:00</output><span id="seek-caption">어린이날 / OFFICIAL</span><output id="total-time">01:11</output></div><input id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="영상 재생 위치" aria-valuetext="0초 / 71초"></div>
+      <button class="all-work-button" id="all-work"><span class="index-icon" aria-hidden="true">☷</span><span>ALL PROJECTS <small>전체 프로젝트 보기</small></span><span>↗</span></button>
+    </section>
+    <footer class="room-footer"><span>AI FILM / SHORT-FORM / COMMERCIAL / CINEMA</span><span class="footer-note" id="footer-note">어린이날 / 후편집본 / 조우 프로덕션</span><span>© <span data-year></span> JOWOO</span></footer>
+  </div>
+  <dialog id="index-dialog" class="room-dialog" aria-labelledby="index-title"><button class="modal-close" data-close-dialog aria-label="작업 목록 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / SELECTED WORK</span><h2 id="index-title">서로 다른 장면.<br>하나의 조우.</h2><p>프로젝트 채널을 방문하거나 작업 영상을 바로 재생해보세요.</p></div><div id="room-channel-list" class="room-channel-list" role="group" aria-label="프로젝트 채널"></div><div id="room-project-list" class="room-project-list"></div></dialog>
+  <dialog id="team-dialog" class="room-dialog team-dialog" aria-labelledby="team-title"><button class="modal-close" data-close-dialog aria-label="팀 소개 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / TWO CREATORS</span><h2 id="team-title">두 시선이 만나는 곳.<br><em>조우 프로덕션.</em></h2><p>두 사람이 함께하는 프로덕션 팀입니다.<br>AI 영상부터 숏폼과 릴스, 광고와 영화까지.<br>형식의 경계 없이, 서로 다른 시선을 새로운 장면으로 만듭니다.</p><div class="team-services"><span>AI 영상</span><span>숏폼 · 릴스</span><span>광고</span><span>영화</span></div><button class="team-contact" id="team-contact">함께 만들 장면이 있다면 <span>↗</span></button></div></dialog>
+  <dialog id="film-list-dialog" class="room-dialog film-list-dialog" aria-labelledby="film-list-title"><button class="modal-close" data-close-dialog aria-label="영상 목록 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / FILMS</span><h2 id="film-list-title">영상 목록</h2><p>보고 싶은 영상을 선택하세요.</p></div><nav class="film-list mobile-film-list" data-film-list aria-label="영상 선택"></nav></dialog>
+</body>
+</html>
