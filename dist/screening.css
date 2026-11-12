@@ -279,3 +279,7 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
   .room-header{row-gap:18px}
   .viewer{padding-top:4px}
 }
+/* 맨 아래 가운데 글씨(작품명 / 버전 / 조우 프로덕션) 삭제 */
+.room-footer .footer-note{display:none}
+.room-footer{grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:700px){.room-footer{grid-template-columns:1fr}.room-footer>span:last-child{justify-self:end}}
