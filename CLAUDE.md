@@ -98,7 +98,8 @@
 - `dist/404.html`: 없는 주소로 들어왔을 때 보이는 안내 화면입니다. 이 파일이 있어야 Cloudflare Pages가 잘못된 주소에 첫 화면 대신 404를 돌려줍니다.
 - `dist/robots.txt`, `dist/sitemap.xml`: 검색엔진용입니다. 예전 시안과 `05-screening.html`은 검색에서 제외했습니다. 새 페이지를 만들면 sitemap에 추가합니다.
 - `index.html` head에 공유 미리보기 태그(og/twitter)와 회사 정보(JSON-LD)가 있습니다. 연락처나 채널이 바뀌면 같이 고칩니다.
-- 네이버 서치어드바이저·구글 서치 콘솔 등록은 도메인 연결이 끝난 뒤 진행합니다. 인증 코드는 `index.html` head에 meta 태그로 넣습니다.
+- 구글 서치 콘솔: 2026-11-13 `https://jowoo-production.com/`(URL 접두어) 등록, HTML 태그로 소유권 확인, sitemap.xml 제출 완료. `google-site-verification` meta 태그는 지우지 않습니다.
+- 네이버 서치어드바이저: 자동 조작이 막힌 사이트라 사용자가 직접 진행합니다. 인증 코드(`naver-site-verification`)는 `index.html`·`05-screening.html` head에 meta 태그로 넣습니다.
 
 ## 수정 확인
 
