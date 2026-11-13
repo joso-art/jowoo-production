@@ -294,3 +294,4 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
 /* 맨 아래 가운데 글씨는 평소 숨기고, 영상 오류 안내일 때만 보여줌 */
 .room-footer{position:relative}
 .room-footer .footer-note.is-error{display:block;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;color:#ff8a6b;font-size:11px}
+@media(max-width:700px){.room-footer .footer-note.is-error{position:static;transform:none;grid-column:1/-1;white-space:normal;justify-self:start;font-size:10px;line-height:1.5}}

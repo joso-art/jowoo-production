@@ -112,7 +112,7 @@
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=21`, 플레이어 JS는 `v=15`, 작품 데이터는 `v=14`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=22`, 플레이어 JS는 `v=15`, 작품 데이터는 `v=14`입니다.
 - PC와 모바일 크기에서 제목, 설명, 연락처, 목록과 버튼이 겹치지 않는지 확인합니다.
 - 플레이어를 변경했다면 네 영상 전환, 재생·일시정지, 여러 위치로 이동, 소리 전환을 실제 화면에서 확인합니다.
 - 사용자는 PC Chrome에서 열어둔 이전 화면이 남았던 적이 있습니다. 공개 반영 후 Ctrl + Shift + R로 새로고침하도록 안내하면 됩니다.
