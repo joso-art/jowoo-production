@@ -25,7 +25,7 @@
 | `dist/assets/posters/` | 영상 썸네일 4개 |
 | `preview.mjs` | 패키지 설치 없이 실행하는 로컬 확인용 서버 |
 
-`dist/01-cinematic.html`부터 `04-hybrid.html`, `design-studies.html` 및 관련 스타일은 예전 디자인 시안입니다. 현재 공개 첫 화면은 `dist/index.html`입니다.
+예전 디자인 시안(`01-cinematic.html`~`04-hybrid.html`, `design-studies.html`, `site.js`, 시안용 CSS·SVG)은 2026-11-14 공개 폴더에서 빼서 `archive/legacy-designs/`에 보관합니다(인터넷에 공개되지 않음). 현재 공개 첫 화면은 `dist/index.html`입니다.
 
 ## 작품 정보와 순서
 
@@ -96,16 +96,23 @@
 ## 검색·공유·오류 화면 (2026-11-13 추가)
 
 - `dist/404.html`: 없는 주소로 들어왔을 때 보이는 안내 화면입니다. 이 파일이 있어야 Cloudflare Pages가 잘못된 주소에 첫 화면 대신 404를 돌려줍니다.
-- `dist/robots.txt`, `dist/sitemap.xml`: 검색엔진용입니다. 예전 시안과 `05-screening.html`은 검색에서 제외했습니다. 새 페이지를 만들면 sitemap에 추가합니다.
+- `dist/robots.txt`, `dist/sitemap.xml`: 검색엔진용입니다. `05-screening.html`은 검색에서 제외했습니다. 새 페이지를 만들면 sitemap에 추가합니다.
 - `index.html` head에 공유 미리보기 태그(og/twitter)와 회사 정보(JSON-LD)가 있습니다. 연락처나 채널이 바뀌면 같이 고칩니다.
 - 구글 서치 콘솔: 2026-11-13 `https://jowoo-production.com/`(URL 접두어) 등록, HTML 태그로 소유권 확인, sitemap.xml 제출 완료. `google-site-verification` meta 태그는 지우지 않습니다.
 - 네이버 서치어드바이저: 2026-11-13 사용자가 직접 사이트 등록·소유확인 완료(자동 조작이 막힌 사이트). 인증 코드(`naver-site-verification`)는 2026-11-13 `index.html`·`05-screening.html` head에 넣었습니다. 지우지 않습니다.
+
+## 보안 헤더와 오류 안내 (2026-11-14 점검)
+
+- `dist/_headers`(Cloudflare Pages 설정): HSTS, X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy, COOP, Content-Security-Policy. 외부 스크립트·폰트·이미지·영상 주소를 새로 쓰면 CSP에 그 주소를 추가해야 합니다(안 그러면 막힙니다). Cloudflare 방문 통계 스크립트(static.cloudflareinsights.com)는 허용해 두었습니다.
+- `#footer-note`는 평소 숨김이고, 영상 불러오기 실패 때만 `is-error` 클래스로 화면 맨 아래 가운데에 안내 문구가 보입니다.
+- 점검 시점에 Cloudflare 서버는 영상 부분 요청(Range)에 206으로 정상 응답합니다. Blob 방식은 그대로 두었지만, 영상을 통째로 받은 뒤 재생해 첫 재생이 느립니다. 직접 MP4 주소로 바꾸는 건 사용자 확인 후 진행합니다.
+- `www.jowoo-production.com`은 아직 연결 안 됨(Pages 사용자 설정 도메인에 www 추가 필요, DNS 버튼은 사용자가 누름).
 
 ## 수정 확인
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=20`, 플레이어 JS는 `v=14`, 작품 데이터는 `v=14`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=21`, 플레이어 JS는 `v=15`, 작품 데이터는 `v=14`입니다.
 - PC와 모바일 크기에서 제목, 설명, 연락처, 목록과 버튼이 겹치지 않는지 확인합니다.
 - 플레이어를 변경했다면 네 영상 전환, 재생·일시정지, 여러 위치로 이동, 소리 전환을 실제 화면에서 확인합니다.
 - 사용자는 PC Chrome에서 열어둔 이전 화면이 남았던 적이 있습니다. 공개 반영 후 Ctrl + Shift + R로 새로고침하도록 안내하면 됩니다.

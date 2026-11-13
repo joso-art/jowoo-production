@@ -111,7 +111,7 @@
       video.src = sourceObjectUrl;
       video.load();
       get('media-note').textContent = current.description || '조우 프로덕션 작업 영상';
-      get('footer-note').textContent = `${current.title} / ${current.label} / 조우 프로덕션`;
+      get('footer-note').textContent = `${current.title} / ${current.label} / 조우 프로덕션`; get('footer-note').classList.remove('is-error');
       loading = wantsPlayback;
       if (wantsPlayback) startVideo();
       else syncPlayback();
@@ -123,6 +123,7 @@
       syncPlayback();
       get('media-note').textContent = '영상에 연결할 수 없습니다';
       get('footer-note').textContent = '영상을 불러오지 못했습니다. 재생 버튼을 눌러 다시 시도해 주세요.';
+      get('footer-note').classList.add('is-error');
     } finally {
       if (sourceRequest === controller) sourceRequest = null;
     }
@@ -161,7 +162,7 @@
     get('current-title').textContent = current.title;
     get('seek-caption').textContent = `${current.title} / ${current.kind}`;
     get('media-note').textContent = current.description || '조우 프로덕션 작업 영상';
-    get('footer-note').textContent = `${current.title} / ${current.label} / 조우 프로덕션`;
+    get('footer-note').textContent = `${current.title} / ${current.label} / 조우 프로덕션`; get('footer-note').classList.remove('is-error');
     get('original-frame-label').textContent = current.aspectLabel || '원본';
     video.hidden = !current.video;
     video.poster = current.poster;
@@ -234,6 +235,7 @@
     syncPlayback();
     get('media-note').textContent = '영상에 연결할 수 없습니다';
     get('footer-note').textContent = '영상에 연결할 수 없습니다. 잠시 후 다시 재생해 주세요.';
+    get('footer-note').classList.add('is-error');
   });
 
   get('room-project-list').innerHTML = films.map((item, index) => `<article class="room-project-card"><button class="room-project" data-scene="${index}" aria-label="${escapeHTML(item.title)} ${escapeHTML(item.label)} 재생"><span class="room-project-image"><img src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.alt)}" width="964" height="720"><span>${two(index + 1)} / ${escapeHTML(item.kind)}</span></span><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.label)} · ${clock(item.duration)} <span>↗</span></small></button>${item.description ? `<p class="room-project-description">${escapeHTML(item.description)}</p>` : ''}${item.roles?.length ? `<p class="room-project-credits"><span>조우 프로덕션</span>${escapeHTML(item.roles.join(' / '))}</p>` : ''}</article>`).join('');
