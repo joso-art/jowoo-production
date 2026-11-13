@@ -283,9 +283,11 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
 .room-footer .footer-note{display:none}
 .room-footer{grid-template-columns:minmax(0,1fr) auto}
 @media(max-width:700px){.room-footer{grid-template-columns:1fr}.room-footer>span:last-child{justify-self:end}}
-/* 2026-11-13 사용자 제작 로고(assets/logo-jowoo.svg)를 '조우 遭遇' 옆에 배치 */
-.room-brand{gap:14px}
-.room-brand .brand-logo{display:block;height:46px;width:auto;flex:none}
+/* 2026-11-13 왼쪽 위: 사용자 로고(assets/logo-jowoo.svg)가 한글 '조우' 자리, 그 옆에 한자 遭遇 */
+.room-brand{gap:12px}
+.room-brand .brand-logo{display:block;height:58px;width:auto;flex:none}
+.room-brand strong>span{margin-left:0}
 @media(max-width:1200px){.room-brand small{display:none}}
-@media(max-width:1000px){.room-brand .brand-logo{height:40px}}
-@media(max-width:700px){.room-brand{gap:10px}.room-brand .brand-logo{height:36px}}
+@media(max-width:1000px){.room-brand .brand-logo{height:50px}}
+@media(max-width:700px){.room-brand{gap:9px}.room-brand .brand-logo{height:44px}}
+.room-brand strong{display:block;transform:translateY(-3px)}

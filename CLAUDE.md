@@ -62,7 +62,7 @@
 ## 유지할 화면과 최근 요청
 
 - 어두운 배경과 연두색 포인트의 영상 상영실 디자인입니다. 참고한 사이트는 https://americanhaiku.xyz/ 입니다.
-- 왼쪽 위는 `조우` + 작은 한자 `遭遇` 글자 로고 옆, 예전 ✳ 자리에 사용자가 직접 만든 로고 이미지(`dist/assets/logo-jowoo.svg`, 뷰파인더 + 빨간 REC 점 + 조우 + PRODUCTION 입력창)를 둡니다. 그 오른쪽에 PRODUCTION / FILM & VISUALS. 글씨(10px, 1200px 이하에서 숨김). 로고 이미지 높이: PC 46px / 1000px 이하 40px / 모바일 36px.
+- 왼쪽 위는 사용자가 직접 만든 로고 이미지(`dist/assets/logo-jowoo.svg`, 뷰파인더 + 빨간 REC 점 + 조우 + PRODUCTION 입력창)가 한글 `조우` 글자 자리에 들어가고, 그 옆에 한자 `遭遇`(17px, 회색 명조), 그 오른쪽에 PRODUCTION / FILM & VISUALS. 글씨(10px, 1200px 이하에서 숨김)를 둡니다. 한글 조우 텍스트와 ✳는 지웠습니다. 로고 이미지 높이: PC 58px / 1000px 이하 50px / 모바일 44px.
 - 2026-11-13 레이아웃 정리: `screening.css` 맨 아래 블록이 기준입니다. 헤더·영상·재생줄·맨 아래 줄이 같은 3단 칸(좌 `--side` / 가운데 / 우 `--side`, 여백 `--pad`)을 씁니다. 메뉴와 영상은 화면 중앙, 재생바는 영상 칸 폭에 맞춥니다. 작은 라벨은 `--label`(10px)로 통일했습니다. 모바일은 영상을 가로 가득 쓰고 FORMAT·SOUND를 영상 아래 한 줄에 둡니다.
 - 맨 아래 가운데 글씨(작품명 / 버전 / 조우 프로덕션)는 사용자 요청으로 지웠습니다. `#footer-note` 요소는 JavaScript가 쓰기 때문에 비운 채 숨겨 두었습니다.
 - 메뉴는 **PROJECTS / ABOUT / LET'S TALK**입니다. 큰 화면에서 메뉴 본문은 22px입니다.
@@ -105,7 +105,7 @@
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=19`, 플레이어 JS는 `v=14`, 작품 데이터는 `v=14`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=20`, 플레이어 JS는 `v=14`, 작품 데이터는 `v=14`입니다.
 - PC와 모바일 크기에서 제목, 설명, 연락처, 목록과 버튼이 겹치지 않는지 확인합니다.
 - 플레이어를 변경했다면 네 영상 전환, 재생·일시정지, 여러 위치로 이동, 소리 전환을 실제 화면에서 확인합니다.
 - 사용자는 PC Chrome에서 열어둔 이전 화면이 남았던 적이 있습니다. 공개 반영 후 Ctrl + Shift + R로 새로고침하도록 안내하면 됩니다.
