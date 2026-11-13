@@ -283,3 +283,8 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
 .room-footer .footer-note{display:none}
 .room-footer{grid-template-columns:minmax(0,1fr) auto}
 @media(max-width:700px){.room-footer{grid-template-columns:1fr}.room-footer>span:last-child{justify-self:end}}
+/* 2026-11-13 왼쪽 위 로고를 사용자 제작 로고(assets/logo-jowoo.svg)로 교체 */
+.room-brand{gap:0;line-height:0}
+.room-brand .brand-logo{display:block;height:76px;width:auto}
+@media(max-width:1000px){.room-brand .brand-logo{height:64px}}
+@media(max-width:700px){.room-brand .brand-logo{height:54px}}
