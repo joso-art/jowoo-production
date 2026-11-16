@@ -99,6 +99,7 @@
 - `dist/robots.txt`, `dist/sitemap.xml`: 검색엔진용입니다. `05-screening.html`은 검색에서 제외했습니다. 새 페이지를 만들면 sitemap에 추가합니다.
 - `index.html` head에 공유 미리보기 태그(og/twitter)와 회사 정보(JSON-LD)가 있습니다. 연락처나 채널이 바뀌면 같이 고칩니다.
 - 구글 서치 콘솔: 2026-11-13 `https://jowoo-production.com/`(URL 접두어) 등록, HTML 태그로 소유권 확인, sitemap.xml 제출 완료. `google-site-verification` meta 태그는 지우지 않습니다.
+- 내부 링크는 `index.html`이 아니라 `/`로 겁니다. Cloudflare Pages가 `/index.html`을 `/`로 리디렉션해서, 구글이 index.html을 '리디렉션이 포함된 페이지'로 신고합니다(2026-11-16 로고 링크를 `/`로 수정). 서치 콘솔에 남은 그 항목은 정상이며 시간이 지나면 정리됩니다.
 - 네이버 서치어드바이저: 2026-11-13 사용자가 직접 사이트 등록·소유확인 완료(자동 조작이 막힌 사이트). 인증 코드(`naver-site-verification`)는 2026-11-13 `index.html`·`05-screening.html` head에 넣었습니다. 지우지 않습니다.
 
 ## 보안 헤더와 오류 안내 (2026-11-14 점검)
