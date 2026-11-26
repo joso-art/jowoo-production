@@ -65,5 +65,26 @@
     if (!document.querySelector('dialog[open]')) document.body.classList.remove('modal-open');
     if (dialog === contactDialog) contactFocus?.focus();
   }));
+  // 휴대폰·브라우저의 '뒤로 가기'로 열린 창을 닫습니다.
+  // 창이 열리면 방문 기록을 한 칸 만들고, 뒤로 가기를 누르면 사이트를 떠나는 대신 창만 닫힙니다.
+  // 닫기 버튼·Esc·바깥 클릭으로 닫았을 때는 만들어 둔 기록 한 칸을 되돌려 놓습니다.
+  const allDialogs = [...document.querySelectorAll('dialog')];
+  let dialogHistoryEntry = false;
+  const dialogWatcher = new MutationObserver(() => {
+    const anyOpen = allDialogs.some(dialog => dialog.open);
+    if (anyOpen && !dialogHistoryEntry) {
+      history.pushState({jowooDialog: true}, '');
+      dialogHistoryEntry = true;
+    } else if (!anyOpen && dialogHistoryEntry) {
+      dialogHistoryEntry = false;
+      history.back();
+    }
+  });
+  allDialogs.forEach(dialog => dialogWatcher.observe(dialog, {attributes: true, attributeFilter: ['open']}));
+  window.addEventListener('popstate', () => {
+    if (!dialogHistoryEntry) return;
+    dialogHistoryEntry = false;
+    allDialogs.forEach(dialog => { if (dialog.open) dialog.close(); });
+  });
   document.querySelectorAll('[data-year]').forEach(item => item.textContent = new Date().getFullYear());
 })();
