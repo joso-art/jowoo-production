@@ -124,14 +124,15 @@
 - 영상 오류: 영상 칸 가운데 `#screen-error` 안내와 `다시 시도` 버튼(`#retry-video`, 같은 영상을 다시 받음). 맨 아래 `#footer-note`는 이제 오류 때도 숨깁니다(요소는 JavaScript가 쓰므로 남겨 둠).
 - 오른쪽 `ORIGINAL FRAME` 글씨(FORMAT 상자와 중복)와 안 쓰는 CSS 규칙(`.screen-title`, `.ratio-wide`, `.ratio-tall`, `.sample-note`, `.aspect-help`)을 지웠습니다.
 - JSON-LD `sameAs`에 '몽권거래소를 고발합니다' 인스타그램·유튜브를 추가했습니다(2026-11-26 사용자 확인). LOADING 퍼센트 표시는 사용자가 넣지 않기로 했습니다.
-- 사용자 답을 기다리는 것: OFFICIAL/RAW 뜻 설명 문구.
+- OFFICIAL/RAW 뜻 설명 문구는 사용자가 일단 넣지 않기로 했습니다.
+- 영상 목록(PC 왼쪽 칸, 모바일 목록 창)은 번호 01~04 대신 OFFICIAL/RAW 짝끼리 한 상자(`.film-pair`)로 묶습니다. 짝은 `screening-data.js`의 `pair` 값(같은 숫자끼리)으로 정합니다. 새 작품을 넣을 때 `pair`를 함께 적습니다(없으면 혼자 한 상자).
 - 로컬 확인 서버는 `.claude/launch.json`의 `jowoo-preview`로도 실행됩니다.
 
 ## 수정 확인
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=30`, 플레이어 JS는 `v=20`, 작품 데이터는 `v=15`, 연락 창 JS(`portfolio.js`)는 `v=2`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=31`, 플레이어 JS는 `v=21`, 작품 데이터는 `v=16`, 연락 창 JS(`portfolio.js`)는 `v=2`입니다.
 - PC와 모바일 크기에서 제목, 설명, 연락처, 목록과 버튼이 겹치지 않는지 확인합니다.
 - 플레이어를 변경했다면 네 영상 전환, 재생·일시정지, 여러 위치로 이동, 소리 전환을 실제 화면에서 확인합니다.
 - 사용자는 PC Chrome에서 열어둔 이전 화면이 남았던 적이 있습니다. 공개 반영 후 Ctrl + Shift + R로 새로고침하도록 안내하면 됩니다.

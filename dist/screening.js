@@ -277,7 +277,16 @@
   }
   get('room-project-list').innerHTML = films.map((item, index) => `<article class="room-project-card"><button class="room-project" data-scene="${index}" aria-label="${escapeHTML(item.title)} ${escapeHTML(item.kind)} 재생"><span class="room-project-image"><img src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.alt)}" width="964" height="720"><span>${two(index + 1)}</span></span><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.kind)} · ${clock(item.duration)} <span aria-hidden="true">↗</span></small></button>${item.description ? `<p class="room-project-description">${escapeHTML(item.description)}</p>` : ''}${item.roles?.length && !sharedRoles ? `<p class="room-project-credits"><span>조우 프로덕션</span>${escapeHTML(item.roles.join(' / '))}</p>` : ''}</article>`).join('');
 
-  const filmListMarkup = films.map((item, index) => `<button class="film-list-item" data-scene="${index}" aria-label="${two(index + 1)}번 ${escapeHTML(item.title)} ${escapeHTML(item.kind)} 재생"><span class="film-list-index">${two(index + 1)}</span><span class="film-list-copy"><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.kind)} · ${clock(item.duration)}</small></span><span class="film-list-arrow" aria-hidden="true">↗</span></button>`).join('');
+  // 영상 목록은 같은 pair 값끼리(OFFICIAL/RAW 짝) 한 상자로 묶습니다. pair가 없으면 혼자 한 상자.
+  const filmRow = (item, index) => `<button class="film-list-item" data-scene="${index}" aria-label="${escapeHTML(item.title)} ${escapeHTML(item.kind)} 재생"><span class="film-list-copy"><small>${escapeHTML(item.kind)}</small><strong>${escapeHTML(item.title)}</strong></span><span class="film-list-time">${clock(item.duration)}</span></button>`;
+  const filmPairs = [];
+  films.forEach((item, index) => {
+    const key = item.pair ?? `solo-${index}`;
+    let group = filmPairs.find(entry => entry.key === key);
+    if (!group) filmPairs.push(group = {key, rows: []});
+    group.rows.push(filmRow(item, index));
+  });
+  const filmListMarkup = filmPairs.map(group => `<div class="film-pair">${group.rows.join('')}</div>`).join('');
   document.querySelectorAll('[data-film-list]').forEach(list => list.innerHTML = filmListMarkup);
 
   const channelList = get('room-channel-list');

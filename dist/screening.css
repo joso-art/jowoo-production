@@ -425,3 +425,15 @@ body[data-style=screening] dialog .modal-close:hover{background:var(--room-ink)}
 .screen-error button:hover{background:var(--room-ink)}
 .room-footer .footer-note.is-error{display:none}
 @media(max-width:700px){.screen-error{gap:14px;padding:16px}.screen-error p{font-size:14px}}
+/* ===== 2026-11-26 영상 목록: OFFICIAL/RAW 짝끼리 한 상자로 묶음 (번호 01~04 대신 짝 구조) ===== */
+.film-list{gap:14px}
+.film-pair{display:grid;border:1px solid var(--room-line)}
+.film-pair .film-list-item{grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;min-height:58px;padding:11px 12px;border:0}
+.film-pair .film-list-item+.film-list-item{border-top:1px solid var(--room-line)}
+.film-pair .film-list-item:hover{background:#d9fa7208}
+.film-pair .film-list-item[aria-current=true]{background:#d9fa7214;box-shadow:inset 0 0 0 1px #d9fa7266}
+.film-pair .film-list-copy{gap:5px}
+.film-pair .film-list-copy small{font:10px/1.2 'Courier New',monospace;letter-spacing:1.4px;color:var(--room-muted)}
+.film-list-time{font:11px/1 'Courier New',monospace;letter-spacing:.6px;color:var(--room-muted)}
+.film-list-item[aria-current=true] .film-list-copy small,.film-list-item[aria-current=true] .film-list-time{color:var(--room-lime)}
+.mobile-film-list .film-pair .film-list-item{min-height:64px;padding:14px}
