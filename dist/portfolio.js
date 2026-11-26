@@ -2,24 +2,41 @@
   let contactFocus;
   // 문의 접수: Web3Forms 접근 키(공개되어도 안전)를 넣으면 문의가 jowoo.media@gmail.com 으로 바로 도착합니다.
   // 키가 비어 있는 동안에는 작성한 내용이 메일 앱(mailto)으로 넘어갑니다.
-  const FORM_KEY = '';
+  const FORM_KEY = 'd8c17df2-cc35-425d-abc9-726bad3d1f7b';
   const MAIL = 'jowoo.media@gmail.com';
   const CATEGORIES = ['영상 제작 의뢰', '광고 · 브랜디드', '숏폼 · 릴스', '영화 · 시나리오 협업', '기타 문의'];
   document.documentElement.style.setProperty('--design-bar', '0px');
   const chips = CATEGORIES.map((name, i) => `<label class="cf-chip"><input type="radio" name="category" value="${name}"${i === 0 ? ' checked' : ''}><span>${name}</span></label>`).join('');
-  document.body.insertAdjacentHTML('beforeend', `<dialog id="contact-dialog" class="portfolio-contact" aria-labelledby="contact-title"><button class="modal-close" data-close-dialog aria-label="문의 창 닫기">×</button><div class="portfolio-contact-copy"><span class="room-kicker">JOWOO PRODUCTION / CONTACT</span><h2 id="contact-title">다음 장면을<br>함께 만들어볼까요?</h2><p>AI 영상, 숏폼·릴스, 광고, 영화.<br>문의 종류를 고르고 내용을 남겨 주세요. 확인 후 회신드립니다.</p><form id="contact-form" class="contact-form" novalidate><fieldset class="cf-field"><legend>문의 종류</legend><div class="cf-chips">${chips}</div></fieldset><div class="cf-row"><label class="cf-field"><span>이름 / 회사</span><input name="name" type="text" maxlength="60" autocomplete="name" required></label><label class="cf-field"><span>회신 받을 이메일</span><input name="email" type="email" maxlength="120" autocomplete="email" inputmode="email" required></label></div><label class="cf-field"><span>희망 일정 · 예산 <em>(선택)</em></span><input name="budget" type="text" maxlength="120"></label><label class="cf-field"><span>문의 내용</span><textarea name="message" rows="5" maxlength="3000" placeholder="어떤 영상을 만들고 싶으신지 편하게 적어 주세요." required></textarea></label><input class="cf-trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="cf-submit" type="submit"><span>문의 보내기</span><i aria-hidden="true">→</i></button></form><p class="cf-status" id="contact-status" role="status" aria-live="polite"></p><div class="contact-direct"><span>또는 직접 연락</span><a id="portfolio-email" href="mailto:${MAIL}">${MAIL}</a><a id="portfolio-instagram" href="https://www.instagram.com/jowoo_ai/" target="_blank" rel="noopener noreferrer">@jowoo_ai ↗</a></div></div></dialog>`);
+  document.body.insertAdjacentHTML('beforeend', `<dialog id="contact-dialog" class="portfolio-contact" aria-labelledby="contact-title"><button class="modal-close" data-close-dialog aria-label="문의 창 닫기">×</button><div class="portfolio-contact-copy"><span class="room-kicker">JOWOO PRODUCTION / CONTACT</span><h2 id="contact-title">다음 장면을<br>함께 만들어볼까요?</h2><p>AI 영상, 숏폼·릴스, 광고, 영화.<br>문의 종류를 고르고 내용을 남겨 주세요. <span class="cf-nowrap">확인 후 회신드립니다.</span></p><form id="contact-form" class="contact-form" novalidate><fieldset class="cf-field"><legend>문의 종류</legend><div class="cf-chips">${chips}</div></fieldset><div class="cf-row"><label class="cf-field"><span>이름 / 회사</span><input name="name" type="text" maxlength="60" autocomplete="name" required aria-describedby="cf-error-name"><small class="cf-error" id="cf-error-name"></small></label><label class="cf-field"><span>회신 받을 이메일</span><input name="email" type="email" maxlength="120" autocomplete="email" inputmode="email" required aria-describedby="cf-error-email"><small class="cf-error" id="cf-error-email"></small></label></div><label class="cf-field"><span>희망 일정 · 예산 <em>(선택)</em></span><input name="budget" type="text" maxlength="120"></label><label class="cf-field"><span>문의 내용</span><textarea name="message" rows="5" maxlength="3000" placeholder="어떤 영상을 만들고 싶으신지 편하게 적어 주세요." required aria-describedby="cf-error-message"></textarea><small class="cf-error" id="cf-error-message"></small></label><input class="cf-trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="cf-submit" type="submit"><span>문의 보내기</span><i aria-hidden="true">→</i></button></form><p class="cf-status" id="contact-status" role="status" aria-live="polite"></p><div class="contact-direct"><span>또는 직접 연락</span><a id="portfolio-email" href="mailto:${MAIL}">${MAIL}</a><a id="portfolio-instagram" href="https://www.instagram.com/jowoo_ai/" target="_blank" rel="noopener noreferrer">@jowoo_ai ↗</a></div></div></dialog>`);
   const contactDialog = document.getElementById('contact-dialog');
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('contact-status');
   const submitBtn = form.querySelector('.cf-submit');
   const setStatus = (text, kind) => { statusEl.textContent = text; statusEl.dataset.kind = kind || ''; };
-  const resetForm = () => { form.reset(); form.hidden = false; setStatus(''); submitBtn.disabled = false; };
+  // 칸별 오류: 문제 있는 칸 아래에 이유를 적고, 다시 입력하면 지웁니다.
+  const setFieldError = (field, text) => {
+    document.getElementById('cf-error-' + field.name).textContent = text;
+    if (text) field.setAttribute('aria-invalid', 'true'); else field.removeAttribute('aria-invalid');
+  };
+  const checkedFields = [form.elements.name, form.elements.email, form.elements.message];
+  checkedFields.forEach(field => field.addEventListener('input', () => setFieldError(field, '')));
+  // 전송 키가 없으면 메일 앱으로 넘어가므로, 버튼 이름도 그 동작에 맞춥니다.
+  if (!FORM_KEY) submitBtn.querySelector('span').textContent = '메일 앱으로 보내기';
+  const resetForm = () => { form.reset(); form.hidden = false; setStatus(''); submitBtn.disabled = false; checkedFields.forEach(field => setFieldError(field, '')); };
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(form));
-    if (!data.name.trim() || !data.message.trim() || !form.email.checkValidity() || !data.email.trim()) {
-      setStatus('이름, 이메일, 문의 내용을 확인해 주세요.', 'error');
-      (!data.name.trim() ? form.name : !form.email.checkValidity() || !data.email.trim() ? form.email : form.message).focus();
+    const emailField = form.elements.email;
+    const problems = [
+      [form.elements.name, !data.name.trim() ? '이름이나 회사명을 적어 주세요.' : ''],
+      [emailField, !data.email.trim() ? '회신 받을 이메일을 적어 주세요.' : !emailField.checkValidity() ? '이메일 주소 형식을 확인해 주세요. 예: name@example.com' : ''],
+      [form.elements.message, !data.message.trim() ? '문의 내용을 적어 주세요.' : '']
+    ];
+    problems.forEach(([field, text]) => setFieldError(field, text));
+    const firstProblem = problems.find(([, text]) => text);
+    if (firstProblem) {
+      setStatus('표시된 칸을 확인해 주세요.', 'error');
+      firstProblem[0].focus();
       return;
     }
     if (data.company_site) { setStatus('문의가 전달되었습니다. 확인 후 회신드리겠습니다.', 'ok'); form.hidden = true; return; }
