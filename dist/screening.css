@@ -295,3 +295,44 @@ body[data-style=screening] .film-list-dialog{width:min(420px,calc(100% - 20px));
 .room-footer{position:relative}
 .room-footer .footer-note.is-error{display:block;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;color:#ff8a6b;font-size:11px}
 @media(max-width:700px){.room-footer .footer-note.is-error{position:static;transform:none;grid-column:1/-1;white-space:normal;justify-self:start;font-size:10px;line-height:1.5}}
+/* 2026-11-26 맨 아래 오른쪽: 상호 + 사업자등록번호 (작게) */
+.room-footer .footer-end{display:flex;align-items:center;gap:18px;white-space:nowrap}
+.room-footer .footer-biz{color:var(--room-muted);letter-spacing:.8px}
+@media(max-width:700px){.room-footer .footer-end{flex-direction:column;align-items:flex-end;gap:4px}.room-footer .footer-biz{letter-spacing:.4px}}
+/* 2026-11-26 문의 창: 종류 선택 + 작성 칸 */
+body[data-style=screening] #contact-dialog{max-width:620px;max-height:calc(100dvh - 32px);overflow-y:auto;scrollbar-width:thin}
+.portfolio-contact-copy>p{margin-bottom:24px}
+.contact-form{display:grid;gap:18px}
+.contact-form[hidden]{display:none}
+.cf-field{display:grid;gap:8px;border:0;padding:0;margin:0;min-width:0}
+.cf-field>span,.cf-field>legend{font:11px Arial,"Malgun Gothic",sans-serif;letter-spacing:.4px;color:var(--room-muted);padding:0}
+.cf-field>span em{font-style:normal;opacity:.7}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cf-chip{position:relative;cursor:pointer}
+.cf-chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.cf-chip span{display:block;padding:9px 14px;border:1px solid var(--room-line);border-radius:2px;font:13px Arial,'Malgun Gothic',sans-serif;color:var(--room-ink);transition:background-color .16s ease-out,color .16s ease-out,border-color .16s ease-out}
+.cf-chip input:checked+span{background:var(--room-lime);border-color:var(--room-lime);color:var(--room-bg)}
+.cf-chip input:focus-visible+span{outline:2px solid var(--room-lime);outline-offset:2px}
+@media(hover:hover) and (pointer:fine){.cf-chip:hover input:not(:checked)+span{border-color:var(--room-lime)}}
+.contact-form input[type=text],.contact-form input[type=email],.contact-form textarea{width:100%;background:#ffffff0a;border:1px solid var(--room-line);border-radius:2px;color:var(--room-ink);font:14px/1.6 Arial,'Malgun Gothic',sans-serif;padding:12px 13px;outline:0;transition:border-color .16s ease-out}
+.contact-form textarea{resize:vertical;min-height:120px}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--room-lime)}
+.contact-form ::placeholder{color:#8e958999}
+.cf-trap{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.cf-submit{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--room-lime);color:var(--room-bg);border:0;border-radius:2px;padding:15px 18px;font:700 15px Arial,'Malgun Gothic',sans-serif;cursor:pointer;transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .16s ease-out}
+.cf-submit i{font-style:normal;font-size:20px}
+.cf-submit:active{transform:scale(.98)}
+.cf-submit:disabled{opacity:.5;cursor:default}
+.cf-submit:focus-visible{outline:2px solid var(--room-ink);outline-offset:3px}
+.cf-status{margin:0;font:13px/1.7 Arial,'Malgun Gothic',sans-serif;color:var(--room-muted);min-height:0}
+.cf-status:empty{display:none}
+.cf-status[data-kind=ok]{color:var(--room-lime)}
+.cf-status[data-kind=error]{color:#ff8a6b}
+.cf-status{margin-top:14px}
+.contact-direct{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin-top:26px;padding-top:18px;border-top:1px solid var(--room-line);font:13px Arial,sans-serif}
+.contact-direct>span{font:var(--label,10px) 'Courier New',monospace;letter-spacing:1.2px;color:var(--room-muted)}
+.contact-direct a{color:var(--room-ink);overflow-wrap:anywhere}
+@media(hover:hover) and (pointer:fine){.contact-direct a:hover{color:var(--room-lime)}}
+@media(max-width:700px){.cf-row{grid-template-columns:1fr}.contact-form input[type=text],.contact-form input[type=email],.contact-form textarea{font-size:16px}.cf-chip span{padding:9px 12px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.cf-chip span,.cf-submit,.contact-form input,.contact-form textarea{transition:none}}
