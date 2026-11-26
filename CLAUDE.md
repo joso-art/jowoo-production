@@ -36,7 +36,7 @@
    - 영상: `assets/videos/video-03-final.mp4`
    - 썸네일: `assets/posters/video-03-final.jpg`
 2. **어른이날** / RAW
-   - 설명: 집단 환각,환청이 의심되는 악몽이자 망상입니다.
+   - 설명: 집단 환각, 환청이 의심되는 악몽이자 망상입니다.
    - 영상: `assets/videos/video-03-raw.mp4`
    - 썸네일: `assets/posters/video-03-raw.jpg`
 3. **몽권랜드** / OFFICIAL
@@ -105,15 +105,32 @@
 ## 보안 헤더와 오류 안내 (2026-11-14 점검)
 
 - `dist/_headers`(Cloudflare Pages 설정): HSTS, X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy, COOP, Content-Security-Policy. 외부 스크립트·폰트·이미지·영상 주소를 새로 쓰면 CSP에 그 주소를 추가해야 합니다(안 그러면 막힙니다). Cloudflare 방문 통계 스크립트(static.cloudflareinsights.com)는 허용해 두었습니다.
-- `#footer-note`는 평소 숨김이고, 영상 불러오기 실패 때만 `is-error` 클래스로 화면 맨 아래 가운데에 안내 문구가 보입니다.
+- `#footer-note`는 항상 숨김입니다. 영상 불러오기 실패 안내는 2026-11-26부터 영상 칸 가운데 `#screen-error`가 맡습니다.
 - 점검 시점에 Cloudflare 서버는 영상 부분 요청(Range)에 206으로 정상 응답합니다. Blob 방식은 그대로 두었지만, 영상을 통째로 받은 뒤 재생해 첫 재생이 느립니다. 직접 MP4 주소로 바꾸는 건 사용자 확인 후 진행합니다.
 - `www.jowoo-production.com`은 아직 연결 안 됨(Pages 사용자 설정 도메인에 www 추가 필요, DNS 버튼은 사용자가 누름).
+
+## 점검 보고서 반영 (2026-11-26)
+
+`.impeccable/critique/2026-11-26T10-37-39Z__dist-index-html.md`의 진행 순서 1~7을 반영했습니다. `screening.css` 맨 아래 `2026-11-26` 블록들이 기준입니다. `prepareVideo()`(Blob 처리)는 건드리지 않았습니다.
+
+- 키보드 포커스: 모든 버튼·링크·재생바가 연두색 2px 선. 영상 칸은 `.screen:focus-visible::after`로 안쪽 테두리를 그립니다(바깥 outline은 잘려서 안 보임).
+- 낭독기: 숨은 `#playback-live`(role=status)가 "어린이날 재생 중 / 일시정지 / 불러오는 중 / 오류"를 한국어로 알립니다. `syncPlayback()`이 갱신합니다. 보이는 `#playback-status`는 aria-hidden.
+- 단축키: 스페이스(재생·정지), ← →(5초), F(전체화면). 안내 `.screen-keys`는 영상 칸에 키보드 포커스가 오거나 마우스를 올렸을 때만 영상 오른쪽 아래에 보입니다. Alt·Ctrl 조합은 가로채지 않습니다.
+- 영상 칸 클릭 = 재생·정지, 더블클릭·`#toggle-fullscreen` 버튼 = 전체화면. 전체화면은 `video` 요소 자체를 키우고 그동안만 브라우저 기본 조작줄(`controls`)을 켭니다. 아이폰은 `webkitEnterFullscreen`.
+- 모바일: 버튼은 최소 44px. 재생줄은 재생바 / 조작 버튼 / ALL PROJECTS 세 줄입니다.
+- 불러오는 중: `viewer[data-loading=true]`일 때 영상 가운데 `LOADING` 표시(0.4초 뒤부터). 퍼센트 표시는 `prepareVideo()`를 고쳐야 해서 사용자 확인 전까지 넣지 않았습니다.
+- 글씨는 전부 10px 이상입니다(`--label` 10px, 모바일 포함).
+- PROJECTS 창: 연두색 얇은 스크롤바, 각진 44px 닫기 버튼, 카드에는 번호 / 제목 / `OFFICIAL·RAW · 길이` / 설명만. 담당 작업은 창 머리 `#index-credits`에 한 번만 나옵니다(모든 작품의 roles가 같을 때. 다르면 카드마다 표시). 데이터의 `label`(후편집본 등)은 화면에 더 이상 보이지 않습니다.
+- 영상 오류: 영상 칸 가운데 `#screen-error` 안내와 `다시 시도` 버튼(`#retry-video`, 같은 영상을 다시 받음). 맨 아래 `#footer-note`는 이제 오류 때도 숨깁니다(요소는 JavaScript가 쓰므로 남겨 둠).
+- 오른쪽 `ORIGINAL FRAME` 글씨(FORMAT 상자와 중복)와 안 쓰는 CSS 규칙(`.screen-title`, `.ratio-wide`, `.ratio-tall`, `.sample-note`, `.aspect-help`)을 지웠습니다.
+- 사용자 확인이 필요해 남겨 둔 것: OFFICIAL/RAW 뜻 설명 문구, LOADING 퍼센트 표시, JSON-LD에 '몽권거래소를 고발합니다' 채널 추가.
+- 로컬 확인 서버는 `.claude/launch.json`의 `jowoo-preview`로도 실행됩니다.
 
 ## 수정 확인
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=25`, 플레이어 JS는 `v=15`, 작품 데이터는 `v=14`, 연락 창 JS(`portfolio.js`)는 `v=2`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=30`, 플레이어 JS는 `v=20`, 작품 데이터는 `v=15`, 연락 창 JS(`portfolio.js`)는 `v=2`입니다.
 - PC와 모바일 크기에서 제목, 설명, 연락처, 목록과 버튼이 겹치지 않는지 확인합니다.
 - 플레이어를 변경했다면 네 영상 전환, 재생·일시정지, 여러 위치로 이동, 소리 전환을 실제 화면에서 확인합니다.
 - 사용자는 PC Chrome에서 열어둔 이전 화면이 남았던 적이 있습니다. 공개 반영 후 Ctrl + Shift + R로 새로고침하도록 안내하면 됩니다.

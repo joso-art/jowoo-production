@@ -45,6 +45,10 @@
     get('toggle-play').setAttribute('aria-label', wantsPlayback ? '영상 일시정지' : '영상 재생');
     get('playback-status').textContent = failed ? 'UNAVAILABLE' : loading ? 'LOADING' : playing ? 'PLAYING' : 'PAUSED';
     viewer.dataset.playing = String(playing);
+    viewer.dataset.loading = String(loading && !failed);
+    get('screen-error').hidden = !failed;
+    const liveText = failed ? '영상을 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 다시 시도 버튼을 눌러 주세요.' : loading ? `${film().title} 불러오는 중` : playing ? `${film().title} 재생 중` : '일시정지';
+    if (get('playback-live').textContent !== liveText) get('playback-live').textContent = liveText;
   }
 
   function syncSound() {
@@ -205,6 +209,32 @@
   get('next-project').addEventListener('click', () => loadFilm(selected + 1));
   seek.addEventListener('input', () => moveTo(Number(seek.value) / 1000 * duration()));
 
+  // 전체화면은 video 요소 자체를 키우고, 그동안만 브라우저 기본 조작줄을 보여 줍니다.
+  function toggleFullscreen() {
+    if (!film().video) return;
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (video.requestFullscreen) video.requestFullscreen().catch(() => {});
+    else if (video.webkitEnterFullscreen) { try { video.webkitEnterFullscreen(); } catch {} }
+  }
+  get('toggle-fullscreen').hidden = !(video.requestFullscreen || video.webkitEnterFullscreen);
+  get('toggle-fullscreen').addEventListener('click', toggleFullscreen);
+  get('room-screen').addEventListener('click', event => { if (!document.fullscreenElement && !event.target.closest('.screen-error')) togglePlay(); });
+  // 오류 뒤 '다시 시도': 같은 영상을 처음부터 다시 받아 재생합니다.
+  get('retry-video').addEventListener('click', () => { wantsPlayback = true; loadFilm(selected); get('room-screen').focus(); });
+  get('room-screen').addEventListener('dblclick', event => { if (!document.fullscreenElement && !event.target.closest('.screen-error')) toggleFullscreen(); });
+  document.addEventListener('fullscreenchange', () => { video.controls = document.fullscreenElement === video; });
+  // 전체화면의 기본 조작줄에서 재생·소리를 바꿔도 화면의 버튼 상태가 맞도록 합니다.
+  video.addEventListener('play', () => {
+    if (changingSource || !currentVideoMatches() || wantsPlayback) return;
+    wantsPlayback = true;
+    syncPlayback();
+  });
+  video.addEventListener('volumechange', () => {
+    if (soundOn !== video.muted) return;
+    soundOn = !video.muted;
+    syncSound();
+  });
+
   video.addEventListener('loadedmetadata', () => {
     if (!currentVideoMatches()) return;
     changingSource = false;
@@ -238,9 +268,16 @@
     get('footer-note').classList.add('is-error');
   });
 
-  get('room-project-list').innerHTML = films.map((item, index) => `<article class="room-project-card"><button class="room-project" data-scene="${index}" aria-label="${escapeHTML(item.title)} ${escapeHTML(item.label)} 재생"><span class="room-project-image"><img src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.alt)}" width="964" height="720"><span>${two(index + 1)} / ${escapeHTML(item.kind)}</span></span><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.label)} · ${clock(item.duration)} <span>↗</span></small></button>${item.description ? `<p class="room-project-description">${escapeHTML(item.description)}</p>` : ''}${item.roles?.length ? `<p class="room-project-credits"><span>조우 프로덕션</span>${escapeHTML(item.roles.join(' / '))}</p>` : ''}</article>`).join('');
+  // 담당 작업이 모든 작품에서 같으면 창 머리에 한 번만, 다르면 카드마다 보여 줍니다.
+  const sharedRoles = films.every(item => (item.roles || []).join('/') === (films[0].roles || []).join('/')) && films[0].roles?.length ? films[0].roles.join(' / ') : '';
+  const indexCredits = get('index-credits');
+  if (indexCredits) {
+    indexCredits.hidden = !sharedRoles;
+    if (sharedRoles) indexCredits.lastChild.textContent = `${films.length === 4 ? '네 작품' : '작품'} 모두 ${sharedRoles}`;
+  }
+  get('room-project-list').innerHTML = films.map((item, index) => `<article class="room-project-card"><button class="room-project" data-scene="${index}" aria-label="${escapeHTML(item.title)} ${escapeHTML(item.kind)} 재생"><span class="room-project-image"><img src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.alt)}" width="964" height="720"><span>${two(index + 1)}</span></span><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.kind)} · ${clock(item.duration)} <span aria-hidden="true">↗</span></small></button>${item.description ? `<p class="room-project-description">${escapeHTML(item.description)}</p>` : ''}${item.roles?.length && !sharedRoles ? `<p class="room-project-credits"><span>조우 프로덕션</span>${escapeHTML(item.roles.join(' / '))}</p>` : ''}</article>`).join('');
 
-  const filmListMarkup = films.map((item, index) => `<button class="film-list-item" data-scene="${index}" aria-label="${two(index + 1)}번 ${escapeHTML(item.title)} ${escapeHTML(item.label)} 재생"><span class="film-list-index">${two(index + 1)}</span><span class="film-list-copy"><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.kind)} · ${clock(item.duration)}</small></span><span class="film-list-arrow" aria-hidden="true">↗</span></button>`).join('');
+  const filmListMarkup = films.map((item, index) => `<button class="film-list-item" data-scene="${index}" aria-label="${two(index + 1)}번 ${escapeHTML(item.title)} ${escapeHTML(item.kind)} 재생"><span class="film-list-index">${two(index + 1)}</span><span class="film-list-copy"><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.kind)} · ${clock(item.duration)}</small></span><span class="film-list-arrow" aria-hidden="true">↗</span></button>`).join('');
   document.querySelectorAll('[data-film-list]').forEach(list => list.innerHTML = filmListMarkup);
 
   const channelList = get('room-channel-list');
@@ -292,8 +329,15 @@
   }));
   [indexDialog, teamDialog, filmListDialog].filter(Boolean).forEach(dialog => dialog.addEventListener('close', () => lastDialogFocus?.focus()));
   document.addEventListener('keydown', event => {
-    if (event.target.closest('button,input,dialog,a') || document.querySelector('dialog[open]')) return;
-    if (event.code === 'Space') { event.preventDefault(); togglePlay(); }
+    if (event.altKey || event.ctrlKey || event.metaKey || document.querySelector('dialog[open]')) return;
+    if (event.target.closest('input,select,textarea')) return;
+    if (event.code === 'KeyF') { event.preventDefault(); toggleFullscreen(); return; }
+    if (document.fullscreenElement) return;
+    if (event.code === 'Space') {
+      if (event.target.closest('button,a')) return;
+      event.preventDefault();
+      togglePlay();
+    }
     if (event.code === 'ArrowLeft') { event.preventDefault(); moveTo(elapsed - 5); }
     if (event.code === 'ArrowRight') { event.preventDefault(); moveTo(elapsed + 5); }
   });

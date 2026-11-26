@@ -26,10 +26,10 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "조우 프로덕션", "alternateName": ["JOWOO PRODUCTION", "遭遇"], "url": "https://jowoo-production.com/", "email": "jowoo.media@gmail.com", "description": "우연히 마주친 장면을 영상으로 남깁니다. 조우 프로덕션은 AI 영상, 숏폼, 광고, 영화를 만드는 프로덕션입니다.", "sameAs": ["https://www.instagram.com/jowoo_ai/", "https://www.instagram.com/mong.g_official/", "https://www.youtube.com/channel/UCcqSDMOp-_WCtb8fI_wtFGw"]}</script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="shared.css">
-  <link rel="stylesheet" href="screening.css?v=25">
+  <link rel="stylesheet" href="screening.css?v=30">
   <script src="portfolio.js?v=2" defer></script>
-  <script src="screening-data.js?v=14" defer></script>
-  <script src="screening.js?v=15" defer></script>
+  <script src="screening-data.js?v=15" defer></script>
+  <script src="screening.js?v=20" defer></script>
 </head>
 <body data-style="screening" data-portfolio>
 
@@ -45,10 +45,10 @@
         <nav class="film-sidebar" aria-label="영상 목록"><span class="film-sidebar-label">영상 목록</span><div class="film-list" data-film-list></div></nav>
         <button id="open-film-list" class="film-list-toggle" aria-label="영상 목록 열기" aria-haspopup="dialog" aria-controls="film-list-dialog"><span aria-hidden="true">☰</span> 영상 목록</button>
         <div class="project-count"><span id="project-number">01</span><small>/ <span id="project-total">04</span></small></div>
-        <div class="meta-note"><span class="live-dot" aria-hidden="true"></span><span id="playback-status">PAUSED</span><small id="media-note">어린이날의 추억과 행복한 기억을 느낄 수 있습니다.</small></div>
+        <div class="meta-note"><span class="live-dot" aria-hidden="true"></span><span id="playback-status" aria-hidden="true">PAUSED</span><span class="sr-only" id="playback-live" role="status" aria-live="polite"></span><small id="media-note">어린이날의 추억과 행복한 기억을 느낄 수 있습니다.</small></div>
       </aside>
       <div class="stage-view">
-        <div class="screen" id="room-screen" tabindex="0" aria-label="영상 플레이어. 스페이스로 재생·일시정지, 좌우 방향키로 5초 이동">
+        <div class="screen" id="room-screen" tabindex="0" role="group" aria-label="영상 플레이어. 클릭 또는 스페이스로 재생·일시정지, 좌우 방향키로 5초 이동, F 키로 전체화면">
           <img class="screen-poster" id="screen-poster" src="assets/posters/video-03-final.jpg" alt="어린이날 — OFFICIAL" width="964" height="720" fetchpriority="high">
           <video id="screen-video" class="screen-video" muted loop playsinline preload="metadata" hidden></video>
           <div class="screen-shade" aria-hidden="true"></div>
@@ -56,6 +56,9 @@
           <span class="screen-mark">JOWOO / PORTFOLIO</span>
           <span class="screen-sample" id="screen-sample">MOTION STUDY</span>
           <span class="frame-corner corner-tl" aria-hidden="true"></span><span class="frame-corner corner-tr" aria-hidden="true"></span><span class="frame-corner corner-bl" aria-hidden="true"></span><span class="frame-corner corner-br" aria-hidden="true"></span>
+          <div class="screen-error" id="screen-error" hidden><p><strong>영상을 불러오지 못했습니다.</strong>인터넷 연결을 확인한 뒤 다시 시도해 주세요.</p><button type="button" id="retry-video">다시 시도</button></div>
+          <span class="screen-loading" aria-hidden="true">LOADING<i></i></span>
+          <span class="screen-keys" aria-hidden="true"><kbd>SPACE</kbd> 재생·정지 / <kbd>← →</kbd> 5초 이동 / <kbd>F</kbd> 전체화면</span>
           <span class="screen-timecode" id="screen-timecode" aria-hidden="true">00:00:00:00</span>
         </div>
       </div>
@@ -63,8 +66,8 @@
         <span class="meta-label">FORMAT</span>
         <div class="aspect-button aspect-readout" aria-label="영상 원본 비율 4대3"><span class="ratio-icon ratio-original" aria-hidden="true"></span><span id="original-frame-label">4:3</span><small>원본</small></div>
 
-        <span class="aspect-help" id="frame-note">ORIGINAL<br>FRAME</span>
         <button id="toggle-sound" class="sound-button" aria-label="소리 켜기">SOUND<br> OFF</button>
+        <button id="toggle-fullscreen" class="sound-button fullscreen-button" aria-label="전체화면으로 보기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><span>FULL<br> SCREEN</span></button>
       </aside>
     </main>
     <section class="player-dock" aria-label="재생 컨트롤">
@@ -78,9 +81,9 @@
       <div class="seek-wrap"><div class="seek-labels"><output id="elapsed-time">00:00</output><span id="seek-caption">어린이날 / OFFICIAL</span><output id="total-time">01:11</output></div><input id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="영상 재생 위치" aria-valuetext="0초 / 71초"></div>
       <button class="all-work-button" id="all-work"><span class="index-icon" aria-hidden="true">☷</span><span>ALL PROJECTS <small>전체 프로젝트 보기</small></span><span>↗</span></button>
     </section>
-    <footer class="room-footer"><span>AI FILM / SHORT-FORM / COMMERCIAL / CINEMA</span><span class="footer-note" id="footer-note" role="status" aria-live="polite"></span><span class="footer-end"><span class="footer-biz">조우 프로덕션 · 사업자등록번호 485-50-01224</span><span>© <span data-year></span> JOWOO</span></span></footer>
+    <footer class="room-footer"><span>AI FILM / SHORT-FORM / COMMERCIAL / CINEMA</span><span class="footer-note" id="footer-note"></span><span class="footer-end"><span class="footer-biz">조우 프로덕션 · 사업자등록번호 485-50-01224</span><span>© <span data-year></span> JOWOO</span></span></footer>
   </div>
-  <dialog id="index-dialog" class="room-dialog" aria-labelledby="index-title"><button class="modal-close" data-close-dialog aria-label="작업 목록 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / SELECTED WORK</span><h2 id="index-title">서로 다른 장면.<br>하나의 조우.</h2><p>프로젝트 채널을 방문하거나 작업 영상을 바로 재생해보세요.</p></div><div id="room-channel-list" class="room-channel-list" role="group" aria-label="프로젝트 채널"></div><div id="room-project-list" class="room-project-list"></div></dialog>
+  <dialog id="index-dialog" class="room-dialog" aria-labelledby="index-title"><button class="modal-close" data-close-dialog aria-label="작업 목록 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / SELECTED WORK</span><h2 id="index-title">서로 다른 장면.<br>하나의 조우.</h2><p>프로젝트 채널을 방문하거나 작업 영상을 바로 재생해보세요.</p><p class="room-dialog-credits" id="index-credits"><span>조우 프로덕션</span>네 작품 모두 기획 / 연출 / 제작 / 편집</p></div><div id="room-channel-list" class="room-channel-list" role="group" aria-label="프로젝트 채널"></div><div id="room-project-list" class="room-project-list"></div></dialog>
   <dialog id="team-dialog" class="room-dialog team-dialog" aria-labelledby="team-title"><button class="modal-close" data-close-dialog aria-label="팀 소개 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / TWO CREATORS</span><h2 id="team-title">두 시선이 만나는 곳.<br><em>조우 프로덕션.</em></h2><p>두 사람이 함께하는 프로덕션 팀입니다.<br>AI 영상부터 숏폼과 릴스, 광고와 영화까지.<br>형식의 경계 없이, 서로 다른 시선을 새로운 장면으로 만듭니다.</p><div class="team-services"><span>AI 영상</span><span>숏폼 · 릴스</span><span>광고</span><span>영화</span></div><button class="team-contact" id="team-contact">함께 만들 장면이 있다면 <span>↗</span></button></div></dialog>
   <dialog id="film-list-dialog" class="room-dialog film-list-dialog" aria-labelledby="film-list-title"><button class="modal-close" data-close-dialog aria-label="영상 목록 닫기">×</button><div class="room-dialog-header"><span class="room-kicker">JOWOO / FILMS</span><h2 id="film-list-title">영상 목록</h2><p>보고 싶은 영상을 선택하세요.</p></div><nav class="film-list mobile-film-list" data-film-list aria-label="영상 선택"></nav></dialog>
 </body>
