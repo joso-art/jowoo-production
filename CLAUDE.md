@@ -132,7 +132,8 @@
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=34`, 플레이어 JS는 `v=21`, 작품 데이터는 `v=16`, 연락 창 JS(`portfolio.js`)는 `v=5`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=35`, 플레이어 JS는 `v=21`, 작품 데이터는 `v=16`, 연락 창 JS(`portfolio.js`)는 `v=6`입니다.
+- 2026-11-26: 문의 양식에 개인정보 수집·이용 동의(필수 체크, `name="consent"`)와 '수집·이용 내용 보기'(`.cf-privacy`)를 넣었습니다. 문구는 `portfolio.js` 안에 있습니다. 수집 항목·보유 기간·전송 서비스가 바뀌면 이 문구도 함께 고칩니다. 보유 기간 문구('목적을 달성하면 지체 없이 파기')는 사용자 확인이 필요한 초안입니다.
 - 2026-11-26: 사용자가 발급한 Web3Forms 접근 키를 `portfolio.js`의 `FORM_KEY`에 넣었습니다. 문의는 메일 앱 대신 Web3Forms로 전송됩니다(`_headers`의 CSP `connect-src`에 `api.web3forms.com` 허용돼 있음).
 - 2026-11-26 문의 창 점검 반영: 칸별 오류 문구(`.cf-error`, `aria-invalid`), 칸 테두리·안내 글씨 대비 올림, 칩·직접 연락 링크 44px, 모든 창의 닫기 버튼이 스크롤을 따라옴(`position:sticky`), 창이 0.2초 전환으로 열림, 버튼 눌림 반응(`:active` scale .97). `FORM_KEY`가 비어 있는 동안 보내기 버튼 이름은 '메일 앱으로 보내기'이고, 키를 넣으면 '문의 보내기'로 돌아갑니다. 키는 web3forms.com에서 사용자가 직접 발급합니다(무료 월 250건).
 - 2026-11-26: 창(PROJECTS·ABOUT·문의·영상 목록)이 열리면 `portfolio.js`가 방문 기록을 한 칸 만들어, 휴대폰 '뒤로 가기'가 사이트를 떠나지 않고 창만 닫습니다. 다른 방법으로 닫으면 그 한 칸을 `history.back()`으로 되돌립니다.

@@ -481,3 +481,16 @@ body[data-style=screening] dialog[open]{opacity:1;transform:none;transition:opac
 .portfolio-contact-copy>p{text-wrap:balance}
 @media(max-width:700px){.contact-direct{row-gap:0;padding-top:14px}.contact-direct>span{flex-basis:100%}}
 .cf-nowrap{white-space:nowrap}
+/* ===== 2026-11-26 문의 창: 개인정보 수집·이용 동의(필수 체크)와 내용 보기 ===== */
+.cf-consent{display:grid;gap:4px}
+.cf-check{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font:13px/1.5 Arial,'Malgun Gothic',sans-serif;color:var(--room-ink)}
+.cf-check input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--room-lime);cursor:pointer}
+.cf-check em{font-style:normal;color:var(--room-muted)}
+.cf-check input[aria-invalid=true]{outline:2px solid #ff8a6b;outline-offset:2px}
+.cf-privacy summary{display:inline-flex;align-items:center;min-height:44px;font:12px Arial,'Malgun Gothic',sans-serif;color:var(--room-muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cf-privacy dl{display:grid;grid-template-columns:72px minmax(0,1fr);gap:6px 12px;margin:2px 0 4px;padding:14px;border:1px solid var(--room-line);font:12px/1.7 Arial,'Malgun Gothic',sans-serif;word-break:keep-all}
+.cf-privacy dt{color:var(--room-muted)}
+.cf-privacy dd{margin:0;color:var(--room-ink)}
+/* 창 제목·설명: 한 단어만 다음 줄에 떨어지지 않게 (모바일 ABOUT '…만나는 / 곳.' 등) */
+.room-dialog-header h2,.portfolio-contact-copy h2{text-wrap:balance;word-break:keep-all}
+.room-dialog-header p{word-break:keep-all;text-wrap:pretty}
