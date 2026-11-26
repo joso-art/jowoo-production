@@ -123,7 +123,8 @@
 - PROJECTS 창: 연두색 얇은 스크롤바, 각진 44px 닫기 버튼, 카드에는 번호 / 제목 / `OFFICIAL·RAW · 길이` / 설명만. 담당 작업은 창 머리 `#index-credits`에 한 번만 나옵니다(모든 작품의 roles가 같을 때. 다르면 카드마다 표시). 데이터의 `label`(후편집본 등)은 화면에 더 이상 보이지 않습니다.
 - 영상 오류: 영상 칸 가운데 `#screen-error` 안내와 `다시 시도` 버튼(`#retry-video`, 같은 영상을 다시 받음). 맨 아래 `#footer-note`는 이제 오류 때도 숨깁니다(요소는 JavaScript가 쓰므로 남겨 둠).
 - 오른쪽 `ORIGINAL FRAME` 글씨(FORMAT 상자와 중복)와 안 쓰는 CSS 규칙(`.screen-title`, `.ratio-wide`, `.ratio-tall`, `.sample-note`, `.aspect-help`)을 지웠습니다.
-- 사용자 확인이 필요해 남겨 둔 것: OFFICIAL/RAW 뜻 설명 문구, LOADING 퍼센트 표시, JSON-LD에 '몽권거래소를 고발합니다' 채널 추가.
+- JSON-LD `sameAs`에 '몽권거래소를 고발합니다' 인스타그램·유튜브를 추가했습니다(2026-11-26 사용자 확인). LOADING 퍼센트 표시는 사용자가 넣지 않기로 했습니다.
+- 사용자 답을 기다리는 것: OFFICIAL/RAW 뜻 설명 문구.
 - 로컬 확인 서버는 `.claude/launch.json`의 `jowoo-preview`로도 실행됩니다.
 
 ## 수정 확인
