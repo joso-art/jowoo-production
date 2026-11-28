@@ -506,3 +506,27 @@ body[data-style=screening] dialog[open]{opacity:1;transform:none;transition:opac
 .team-facts dd strong{font-weight:500;font-size:15px;color:var(--room-lime)}
 .team-contact{font-size:14px;margin-top:28px}
 @media(max-width:700px){.team-facts{gap:10px 16px}.team-contact{font-size:13px}}
+/* ===== 2026-11-28 태블릿 세로 화면: 영상을 오른쪽 두 칸에 크게, 형식·소리·팀 소개는 영상 아래 ===== */
+@media(min-width:701px) and (max-width:1000px){.all-work-button .index-icon{display:none}.all-work-button{gap:8px;padding:12px}}
+@media(min-width:701px) and (max-width:1000px) and (orientation:portrait){
+  .viewer{grid-template-columns:var(--side) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);row-gap:14px}
+  .project-meta{grid-column:1;grid-row:1/3}
+  .stage-view{grid-column:2;grid-row:1;width:100%;height:auto;aspect-ratio:var(--media-aspect,1.3333);max-height:60vh}
+  .aspect-tools{grid-column:2;grid-row:2;flex-direction:row;flex-wrap:wrap;align-items:center;align-content:flex-start;justify-content:flex-start;gap:14px}
+  .aspect-tools>*{width:auto}
+  .aspect-button{flex-direction:row;width:auto;min-height:44px;padding:0 12px;gap:8px;font-size:12px}
+  .aspect-button .ratio-original{width:18px;height:14px}
+  .aspect-button small{margin:0}
+  .sound-button{width:auto;min-height:44px;margin:0 0 0 auto;padding:0 14px;border:1px solid var(--room-lime);border-radius:2px}
+  .sound-button br{display:none}
+  .fullscreen-button{flex-direction:row;justify-content:center;width:44px;min-width:44px;padding:0;margin:0}
+  .fullscreen-button>span{display:none}
+  .aspect-tools>.studio-note{display:block;flex-basis:100%;margin:10px 0 0;max-width:46ch}
+}
+/* ===== 2026-11-28 휴대폰: 로고 오른쪽에 무엇을 하는 팀인지 한 줄, 재생바 높이 44px ===== */
+.room-tagline{display:none}
+@media(max-width:700px){
+  .room-tagline{display:block;grid-column:2;grid-row:1;justify-self:end;align-self:center;margin:0;text-align:right;font:12px/1.5 Arial,'Malgun Gothic',sans-serif;letter-spacing:0;color:var(--room-muted);white-space:nowrap}
+  .room-tagline strong{display:block;font-weight:500;font-size:13px;color:var(--room-ink)}
+  #seek{height:44px}
+}
