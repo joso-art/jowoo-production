@@ -494,3 +494,7 @@ body[data-style=screening] dialog[open]{opacity:1;transform:none;transition:opac
 /* 창 제목·설명: 한 단어만 다음 줄에 떨어지지 않게 (모바일 ABOUT '…만나는 / 곳.' 등) */
 .room-dialog-header h2,.portfolio-contact-copy h2{text-wrap:balance;word-break:keep-all}
 .room-dialog-header p{word-break:keep-all;text-wrap:pretty}
+/* ===== 2026-11-28 오른쪽 칸 맨 아래 팀 소개 한 줄 (PC 전용, 낮은 화면·모바일에서는 숨김) ===== */
+.aspect-tools>.studio-note{width:100%;margin:auto 0 0;padding-top:16px;border-top:1px solid var(--room-line);text-align:left;font:12px/1.75 Arial,'Malgun Gothic',sans-serif;letter-spacing:0;color:var(--room-muted);word-break:keep-all}
+.studio-note strong{display:block;margin-bottom:8px;font-weight:500;font-size:14px;line-height:1.5;color:var(--room-ink);text-wrap:balance}
+@media(max-height:760px),(max-width:700px){.aspect-tools>.studio-note{display:none}}

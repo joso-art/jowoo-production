@@ -132,7 +132,8 @@
 
 - HTML 초기 표시 값과 `screening-data.js`의 실제 데이터가 일치하는지 확인합니다.
 - `node --check dist/screening.js`, `node --check dist/screening-data.js`, `node --check dist/portfolio.js`로 수정한 JavaScript의 구문을 확인할 수 있습니다.
-- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=35`, 플레이어 JS는 `v=21`, 작품 데이터는 `v=16`, 연락 창 JS(`portfolio.js`)는 `v=6`입니다.
+- 바꾼 CSS나 JavaScript의 `?v=` 값을 갱신하여 캐시가 남지 않도록 합니다. 현재 CSS는 `v=36`, 플레이어 JS는 `v=21`, 작품 데이터는 `v=16`, 연락 창 JS(`portfolio.js`)는 `v=6`입니다.
+- 2026-11-28: PC 오른쪽 칸 맨 아래(ALL PROJECTS 위)에 팀 소개 `.studio-note`를 넣었습니다. 문구: '영화와 무대의 미술에서 출발한 두 사람. 기획부터 연출, 편집까지 직접 하며, 장면의 공간과 색까지 설계한 시네마틱 AI 광고를 만듭니다.' 사용자와 정한 방향: '전공·공부'(어려 보임), '현장'(현장직 느낌), '형식을 가리지 않는다'(전문성 약해 보임) 표현은 쓰지 않습니다. 화면 높이 760px 이하와 모바일에서는 숨깁니다. ABOUT 창 문구는 아직 예전 그대로입니다.
 - 2026-11-26: 문의 양식에 개인정보 수집·이용 동의(필수 체크, `name="consent"`)와 '수집·이용 내용 보기'(`.cf-privacy`)를 넣었습니다. 문구는 `portfolio.js` 안에 있습니다. 수집 항목·보유 기간·전송 서비스가 바뀌면 이 문구도 함께 고칩니다. 보유 기간 문구('목적을 달성하면 지체 없이 파기')는 사용자 확인이 필요한 초안입니다.
 - 2026-11-26: 사용자가 발급한 Web3Forms 접근 키를 `portfolio.js`의 `FORM_KEY`에 넣었습니다. 문의는 메일 앱 대신 Web3Forms로 전송됩니다(`_headers`의 CSP `connect-src`에 `api.web3forms.com` 허용돼 있음).
 - 2026-11-26 문의 창 점검 반영: 칸별 오류 문구(`.cf-error`, `aria-invalid`), 칸 테두리·안내 글씨 대비 올림, 칩·직접 연락 링크 44px, 모든 창의 닫기 버튼이 스크롤을 따라옴(`position:sticky`), 창이 0.2초 전환으로 열림, 버튼 눌림 반응(`:active` scale .97). `FORM_KEY`가 비어 있는 동안 보내기 버튼 이름은 '메일 앱으로 보내기'이고, 키를 넣으면 '문의 보내기'로 돌아갑니다. 키는 web3forms.com에서 사용자가 직접 발급합니다(무료 월 250건).
