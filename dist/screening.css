@@ -498,3 +498,11 @@ body[data-style=screening] dialog[open]{opacity:1;transform:none;transition:opac
 .aspect-tools>.studio-note{width:100%;margin:auto 0 0;padding-top:16px;border-top:1px solid var(--room-line);text-align:left;font:12px/1.75 Arial,'Malgun Gothic',sans-serif;letter-spacing:0;color:var(--room-muted);word-break:keep-all}
 .studio-note strong{display:block;margin-bottom:8px;font-weight:500;font-size:14px;line-height:1.5;color:var(--room-ink);text-wrap:balance}
 @media(max-height:760px),(max-width:700px){.aspect-tools>.studio-note{display:none}}
+/* ===== 2026-11-28 ABOUT 창: 팀 소개 문구를 새로 쓰고, 칩 4개 대신 주력·함께 만드는 것·작업 범위 표 ===== */
+.team-dialog .room-dialog-header p{font-size:13px;line-height:1.85;color:#bac2b4;max-width:54ch}
+.team-facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px 24px;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--room-line);font:13px/1.6 Arial,'Malgun Gothic',sans-serif;word-break:keep-all}
+.team-facts dt{color:var(--room-muted);font-size:12px;line-height:1.75}
+.team-facts dd{margin:0;color:var(--room-ink)}
+.team-facts dd strong{font-weight:500;font-size:15px;color:var(--room-lime)}
+.team-contact{font-size:14px;margin-top:28px}
+@media(max-width:700px){.team-facts{gap:10px 16px}.team-contact{font-size:13px}}
